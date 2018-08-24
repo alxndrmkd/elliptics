@@ -1,0 +1,3 @@
+[submodule "cbits/ref10_extract"]
+	path = cbits/ref10_extract
+	url = git@github.com:disfenoid/ref10_extract.git
