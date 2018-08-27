@@ -9,7 +9,7 @@ import           Data.Maybe
 
 main :: IO ()
 main = do
-  seed <- random 256
+  seed <- random 32
   rnd <- random 64
   let (C.KeyPair xpub xprv) = C.keyPairgen seed
       signature = C.сurve25519Sign xprv msg rnd
