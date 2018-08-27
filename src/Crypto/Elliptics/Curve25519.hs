@@ -7,8 +7,9 @@
   Portability : POSIX
 -}
 module Crypto.Elliptics.Curve25519
+  ( 
   -- * Constants
-  ( curve25519KeyLength
+    curve25519KeyLength
   , curve25519SignatureLength
   -- * Types
   , PrivateKey

@@ -1,15 +1,17 @@
 name:                elliptics
 version:             0.1.0.0
 github:              "https://github.com/disfenoid/elliptics"
+maintainer:          "disfenoid@gmail.com"
 license:             MIT
+license-file:        LICENSE
 author:              "Alexandr M."
 
 extra-source-files:
 - README.md
 
 # Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
+synopsis:            Bindings to ref10_extract lib
+category:            cryptography
 
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
