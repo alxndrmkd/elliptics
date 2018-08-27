@@ -19,7 +19,6 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
 - base >= 4.7 && < 5
 - bytestring
-- random-bytestring
 
 library:
   source-dirs: src
@@ -142,6 +141,7 @@ executables:
     - -optl-static
     dependencies:
     - elliptics
+    - random-bytestring
     - base58-bytestring
 
 tests:

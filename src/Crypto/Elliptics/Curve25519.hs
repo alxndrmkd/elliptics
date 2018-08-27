@@ -25,7 +25,6 @@ module Crypto.Elliptics.Curve25519
   ) where
 
 import qualified Data.ByteString        as B
-import qualified Data.ByteString.Random as Rnd
 import           Data.ByteString.Unsafe
 import           Foreign.C.Types
 import           Foreign.Marshal.Alloc
@@ -39,6 +38,7 @@ curve25519SignatureLength :: Int
 curve25519SignatureLength = 64
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
 newtype PrivateKey =
   Prv B.ByteString
 
@@ -60,6 +60,7 @@ keyPairgen rnd = KeyPair xpub xprv
     xpub = curve25519Keygen xprv
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
 publicKeyBytes :: PublicKey -> B.ByteString
 publicKeyBytes (Pub bs) = bs
 
@@ -105,10 +106,9 @@ foreign import ccall unsafe "curve25519_sign" c_curve25519_sign
   :: Ptr CChar ->
   Ptr CChar -> Ptr CChar -> CULong -> Ptr CChar -> IO CInt
 
-сurve25519Sign :: PrivateKey -> B.ByteString -> Signature
-сurve25519Sign (Prv xprv) msg =
-  unsafePerformIO $ do
-    random <- Rnd.random 64
+сurve25519Sign :: PrivateKey -> B.ByteString -> B.ByteString -> Signature
+сurve25519Sign (Prv xprv) msg random =
+  unsafePerformIO $
     B.useAsCString xprv $ \xprvPtr ->
       B.useAsCStringLen msg $ \(msgPtr, msgLen) ->
         B.useAsCString random $ \rndPtr ->
@@ -136,14 +136,10 @@ foreign import ccall unsafe "curve25519_private_keygen" c_curve25519_private_key
 
 curve25519PrivateKeygen :: B.ByteString -> PrivateKey
 curve25519PrivateKeygen random =
-  unsafePerformIO $ do
-    seed <- check random
-    B.useAsCString seed $ \rndPtr ->
+  unsafePerformIO $
+    B.useAsCString random $ \rndPtr ->
       fmap Prv $
       allocaBytes curve25519KeyLength $ \outPtr -> do
         c_curve25519_private_keygen rndPtr outPtr
         B.packCStringLen (outPtr, curve25519KeyLength)
-  where
-    check "" = Rnd.random 32
-    check r  = return r
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

@@ -10,8 +10,9 @@ import           Data.Maybe
 main :: IO ()
 main = do
   seed <- random 256
+  rnd <- random 64
   let (C.KeyPair xpub xprv) = C.keyPairgen seed
-      signature = C.сurve25519Sign xprv msg
+      signature = C.сurve25519Sign xprv msg rnd
   print $ C.curve25519Verify xpub signature msg
 
 msg :: ByteString
