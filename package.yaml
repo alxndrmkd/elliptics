@@ -1,6 +1,6 @@
 name:                elliptics
 version:             0.1.0.0
-github:              "https://github.com/disfenoid/elliptics"
+github:              "disfenoid/elliptics"
 maintainer:          "disfenoid@gmail.com"
 license:             MIT
 license-file:        LICENSE
@@ -10,7 +10,7 @@ extra-source-files:
 - README.md
 
 # Metadata used when publishing your package
-synopsis:            Bindings to ref10_extract lib
+synopsis:            Bindings to trevp/ref10_extract
 category:            cryptography
 
 # To avoid duplicated efforts in documentation and dealing with the
@@ -24,64 +24,6 @@ dependencies:
 
 library:
   source-dirs: src
-
-  install-includes:
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_uint32.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_sign_edwards25519sha512batch.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_sign.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_int64.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_verify_32.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_int32.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_uint64.h
-  - cbits/ref10_extract/ed25519/additions/crypto_hash_sha512.h
-  - cbits/ref10_extract/ed25519/additions/zeroize.h
-  - cbits/ref10_extract/ed25519/additions/curve_sigs.h
-  - cbits/ref10_extract/ed25519/additions/compare.h
-  - cbits/ref10_extract/ed25519/base.h
-  - cbits/ref10_extract/ed25519/pow22523.h
-  - cbits/ref10_extract/ed25519/d2.h
-  - cbits/ref10_extract/ed25519/d.h
-  - cbits/ref10_extract/ed25519/ge_add.h
-  - cbits/ref10_extract/ed25519/sc.h
-  - cbits/ref10_extract/ed25519/ge_p2_dbl.h
-  - cbits/ref10_extract/ed25519/ge_sub.h
-  - cbits/ref10_extract/ed25519/api.h
-  - cbits/ref10_extract/ed25519/base2.h
-  - cbits/ref10_extract/ed25519/ge_msub.h
-  - cbits/ref10_extract/ed25519/fe.h
-  - cbits/ref10_extract/ed25519/ge.h
-  - cbits/ref10_extract/ed25519/ge_madd.h
-  - cbits/ref10_extract/ed25519/pow225521.h
-  - cbits/ref10_extract/ed25519/sqrtm1.h
-
-  includes:
-  - cbits/ref10_extract/ed25519/base.h
-  - cbits/ref10_extract/ed25519/pow22523.h
-  - cbits/ref10_extract/ed25519/d2.h
-  - cbits/ref10_extract/ed25519/d.h
-  - cbits/ref10_extract/ed25519/ge_add.h
-  - cbits/ref10_extract/ed25519/sc.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_uint32.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_sign_edwards25519sha512batch.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_sign.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_int64.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_verify_32.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_int32.h
-  - cbits/ref10_extract/ed25519/nacl_includes/crypto_uint64.h
-  - cbits/ref10_extract/ed25519/ge_p2_dbl.h
-  - cbits/ref10_extract/ed25519/ge_sub.h
-  - cbits/ref10_extract/ed25519/api.h
-  - cbits/ref10_extract/ed25519/base2.h
-  - cbits/ref10_extract/ed25519/ge_msub.h
-  - cbits/ref10_extract/ed25519/fe.h
-  - cbits/ref10_extract/ed25519/ge.h
-  - cbits/ref10_extract/ed25519/ge_madd.h
-  - cbits/ref10_extract/ed25519/pow225521.h
-  - cbits/ref10_extract/ed25519/additions/crypto_hash_sha512.h
-  - cbits/ref10_extract/ed25519/additions/zeroize.h
-  - cbits/ref10_extract/ed25519/additions/curve_sigs.h
-  - cbits/ref10_extract/ed25519/additions/compare.h
-  - cbits/ref10_extract/ed25519/sqrtm1.h
 
   c-sources:
   - cbits/ref10_extract/ed25519/fe_mul.c
@@ -131,21 +73,6 @@ library:
   - cbits/ref10_extract/ed25519/ge_p2_dbl.c
   exposed-modules: Crypto.Elliptics.Curve25519
 
-
-executables:
-  elliptics-exe:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    - -optl-static
-    dependencies:
-    - elliptics
-    - random-bytestring
-    - base58-bytestring
-
 tests:
   elliptics-test:
     main:                Spec.hs
@@ -156,6 +83,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - elliptics
-    - random-bytestring
-    - base58-bytestring
     - QuickCheck
